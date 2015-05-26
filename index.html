@@ -41,7 +41,23 @@
             var message = event.data.split(':');
             var eventName = message[0];
             var iframes, len, i = 0;
+
+            // Domains to accept post messages from:
+
             var senderDomains = ['http://localhost:8000'];
+
+            // Fix .indexOf in IE8
+
+            if (!Array.prototype.indexOf) {
+
+                Array.prototype.indexOf = function(obj, start) {
+
+                    for (var i = (start || 0), j = this.length; i < j; i++) {
+                        if (this[i] === obj) { return i; }
+                    }
+                    return -1;
+                }
+            }
 
             if ( senderDomains.indexOf(event.origin) !== -1 && eventName === 'resize' ) {
 
@@ -77,15 +93,24 @@
     <header>
         <h1>Super-Awesome-Header</h1>
     </header>
-    <!-- Same Origin iFrame -->
+    <!-- Same Origin iFrame 
 
     <iframe src="iframe.html" id="responsive-iframe" scrolling="no" frameborder="0"></iframe>
-    <!-- 
+
+    -->
+    
+    <!--
     
     Cross Origin iFrame
-    Start server in directory with: python -m SimpleHTTPServer 8000
-    <iframe src="http://localhost:8000/iframe.html" id="responsive-iframe" scrolling="no" frameborder="0"></iframe>
+    Start server in directory with: 
+
+    To test uncomment and start a second server with: python -m SimpleHTTPServer 8000
+
     -->
+
+    <iframe src="http://localhost:8000/iframe.html" id="responsive-iframe" scrolling="no" frameborder="0"></iframe>
+    
+    
 
 </body>
 </html>
