@@ -5,6 +5,7 @@
     // get requestAnimationFrameObject - see: https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
 
     awesomeIframe.requestAnimFrame = (function(){
+        var lastTime = 0;
             
         return  win.requestAnimationFrame ||
 
